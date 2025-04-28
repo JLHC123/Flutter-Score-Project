@@ -13,5 +13,6 @@ namespace Flutter_Score_Project.Data
         }
 
         public DbSet<Score> score { get; set; }
+        public DbSet<User> user { get; set; }
     }
 }

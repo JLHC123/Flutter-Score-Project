@@ -9,5 +9,7 @@ namespace Flutter_Score_Project.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime DateCreated { get; set; }
+        public long UserId { get; set; }
+        public User User { get; set; }
     }
 }
