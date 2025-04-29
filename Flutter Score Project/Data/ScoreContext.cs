@@ -14,5 +14,13 @@ namespace Flutter_Score_Project.Data
 
         public DbSet<Score> score { get; set; }
         public DbSet<User> user { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Scores)
+                .WithOne(s => s.User)
+                .HasForeignKey(s => s.UserId);
+        }
     }
 }

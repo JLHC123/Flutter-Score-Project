@@ -1,6 +1,7 @@
 ﻿using Flutter_Score_Project.Data;
 using Flutter_Score_Project.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Flutter_Score_Project.Controllers
 {
@@ -10,7 +11,7 @@ namespace Flutter_Score_Project.Controllers
         public IActionResult GetScores()
         {
             ScoreContext _context = new ScoreContext();
-            var scores = _context.score.ToList();
+            var scores = _context.score.Include(s => s.User).ToList();
             return Ok(scores);
         }
 
