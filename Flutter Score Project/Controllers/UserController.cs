@@ -35,5 +35,22 @@ namespace Flutter_Score_Project.Controllers
             _context.SaveChanges();
             return Ok(user);
         }
+        [HttpGet("GetUserScores")]
+        public IActionResult GetUserScores(long UserId)
+        {
+            ScoreContext _context = new ScoreContext();
+            var user = _context.user.Find(UserId);
+
+            if (user == null)
+            {
+                return NotFound($"User with ID {UserId} not found.");
+            }
+
+            var scores = _context.score
+                .Where(s => s.UserId == UserId)
+                .ToList();
+
+            return Ok(scores);
+        }
     }
 }
