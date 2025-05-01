@@ -37,5 +37,20 @@ namespace Flutter_Score_Project.Controllers
             _context.SaveChanges();
             return Ok(score);
         }
+
+        [HttpGet("GetScoresSorted")]
+        public IActionResult GetScoreSorted()
+        {
+            ScoreContext _context = new ScoreContext();
+            try
+            {
+                var sortedScores = _context.score.Include(s => s.User).OrderByDescending(s => s.ScoreResult).ToList();
+                return Ok(sortedScores);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
     }
 }
