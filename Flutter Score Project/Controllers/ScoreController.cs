@@ -52,5 +52,22 @@ namespace Flutter_Score_Project.Controllers
                 return StatusCode(500, "Internal server error: " + ex.Message);
             }
         }
+
+        [HttpGet("GetUserSortedScores")]
+        public IActionResult GetUserScores(long UserId)
+        {
+            ScoreContext _context = new ScoreContext();
+            var user = _context.user.Find(UserId);
+            if (user == null)
+            {
+                return NotFound($"User with ID {UserId} not found.");
+            }
+            var userSortedScores = _context.score
+                .Where(s => s.UserId == UserId)
+                .OrderByDescending(s => s.ScoreResult)
+                .ToList();
+            return Ok(userSortedScores);
+
+        }
     }
 }
