@@ -39,7 +39,7 @@ namespace Flutter_Score_Project.Controllers
         }
 
         [HttpGet("GetScoresSorted")]
-        public IActionResult GetScoreSorted()
+        public IActionResult GetScoresSorted()
         {
             ScoreContext _context = new ScoreContext();
             try
@@ -53,7 +53,7 @@ namespace Flutter_Score_Project.Controllers
             }
         }
 
-        [HttpGet("GetUserSortedScores")]
+        [HttpGet("GetUserScoresSorted")]
         public IActionResult GetUserScores(long UserId)
         {
             ScoreContext _context = new ScoreContext();
